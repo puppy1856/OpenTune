@@ -399,7 +399,7 @@ suspend fun downloadApk(
 ): Uri? = withContext(Dispatchers.IO) {
     try {
         val apkUrl =
-            "https://github.com/Arturo254/OpenTune/releases/download/$version/app-release.apk"
+            "https://github.com/puppy1856/OpenTune/releases/download/$version/app-release.apk"
 
         val downloadDir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
         val apkFile = File(downloadDir, "app-release-$version.apk")
