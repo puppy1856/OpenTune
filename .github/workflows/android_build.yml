@@ -31,7 +31,7 @@ jobs:
         env:
           ENCODED_STRING: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
         run: |
-          echo $ENCODED_STRING | base64 -d > release-key.jks
+          echo $ENCODED_STRING | base64 -d > app/release-key.jks
 
       # [修改] 編譯時注入環境變數，讓 Gradle 讀取
       - name: Build APKs
