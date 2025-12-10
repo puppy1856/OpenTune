@@ -1,10 +1,7 @@
-name: Build Signed APKs (Jimmys-version)
+name: Build Signed APKs (Manual)
 
+# 只保留 workflow_dispatch，表示必須手動按按鈕才會開始
 on:
-  push:
-    branches: [ "Jimmys-version" ] # 修改：只監聽這個分支
-  pull_request:
-    branches: [ "Jimmys-version" ]
   workflow_dispatch:
 
 jobs:
@@ -26,14 +23,14 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # [新增] 從 Secret 解碼出 .jks 金鑰檔案
+      # 解碼金鑰到 app 資料夾
       - name: Decode Keystore
         env:
           ENCODED_STRING: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
         run: |
           echo $ENCODED_STRING | base64 -d > app/release-key.jks
 
-      # [修改] 編譯時注入環境變數，讓 Gradle 讀取
+      # 執行編譯
       - name: Build APKs
         env:
           APP_RELEASE_STORE_FILE: release-key.jks
