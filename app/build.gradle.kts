@@ -24,21 +24,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            isCrunchPngs = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-        debug {
-            applicationIdSuffix = ".debug"
-        }
-    }
-
     signingConfigs {
         getByName("debug") {
             if (System.getenv("MUSIC_DEBUG_SIGNING_STORE_PASSWORD") != null) {
@@ -47,6 +32,41 @@ android {
                 keyAlias = "debug"
                 keyPassword = System.getenv("MUSIC_DEBUG_SIGNING_KEY_PASSWORD")
             }
+        }
+
+        // [新增] Release 簽名設定
+        create("release") {
+            // 檢查環境變數是否存在 (GitHub Actions 會提供這些)
+            val keystorePath = System.getenv("APP_RELEASE_STORE_FILE")
+            val keystorePassword = System.getenv("APP_RELEASE_STORE_PASSWORD")
+            val keyAliasName = System.getenv("APP_RELEASE_KEY_ALIAS")
+            val keyPasswordText = System.getenv("APP_RELEASE_KEY_PASSWORD")
+
+            if (keystorePath != null && keystorePassword != null) {
+                storeFile = file(keystorePath)
+                storePassword = keystorePassword
+                keyAlias = keyAliasName
+                keyPassword = keyPasswordText
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isCrunchPngs = false
+
+            // [新增] 套用上面定義的 release 簽名設定
+            signingConfig = signingConfigs.getByName("release")
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
+            applicationIdSuffix = ".debug"
         }
     }
 
