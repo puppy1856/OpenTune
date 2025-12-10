@@ -119,7 +119,14 @@ val QueueEditLockKey = booleanPreferencesKey("queueEditLock")
 
 val LyricFontSizeKey = intPreferencesKey("lyricFontSize")
 val fullScreenLyricsKey = booleanPreferencesKey("fullScreenLyrics")
+val AnimateLyricsKey = booleanPreferencesKey("animate_lyrics")
 
+
+val PlayPauseButtonShapeKey = stringPreferencesKey("playPauseButtonShape")
+const val DefaultPlayPauseButtonShape = "Cookie9Sided"
+
+val MiniPlayerThumbnailShapeKey = stringPreferencesKey("miniPlayerThumbnailShape")
+const val DefaultMiniPlayerThumbnailShape = "Circle"
 enum class LibraryViewType {
     LIST,
     GRID,
