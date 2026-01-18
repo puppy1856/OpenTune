@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <!-- Bottom navigation -->
     <string name="home">首頁</string>
     <string name="songs">歌曲</string>
     <string name="artists">藝人</string>
     <string name="albums">專輯</string>
     <string name="playlists">播放清單</string>
-    <!-- Top bar -->
     <plurals name="n_selected">
         <item quantity="other">已選取 %d 個項目</item>
     </plurals>
-    <!-- Home -->
     <string name="history">播放紀錄</string>
     <string name="stats">統計</string>
     <string name="mood_and_genres">情境與類型</string>
@@ -22,14 +19,12 @@
     <string name="similar_to">風格近似</string>
     <string name="keep_listening">持續聆聽</string>
     <string name="your_ytb_playlists">您的 youtube 帳號</string>
-    <!-- History -->
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
     <string name="this_week">本週</string>
     <string name="last_week">上週</string>
     <string name="local_history">本機</string>
     <string name="remote_history">遠端</string>
-    <!-- Stats -->
     <string name="most_played_songs">最常播放的歌曲</string>
     <string name="most_played_artists">最常播放的藝人</string>
     <string name="most_played_albums">最常播放的專輯</string>
@@ -37,7 +32,6 @@
     <string name="months">月</string>
     <string name="years">年</string>
     <string name="continuous">連續</string>
-    <!-- Search -->
     <string name="search">搜尋</string>
     <string name="search_yt_music">搜尋 YouTube Music…</string>
     <string name="search_library">搜尋媒體庫…</string>
@@ -54,11 +48,8 @@
     <string name="filter_featured_playlists">精選播放清單</string>
     <string name="filter_bookmarked">收藏</string>
     <string name="no_results_found">找不到結果</string>
-    <!-- Artist screen -->
     <string name="from_your_library">來自你的媒體庫</string>
-    <!-- Album screen -->
     <string name="other_versions">其他版本</string>
-    <!-- Library -->
     <string name="liked">已按讚</string>
     <string name="offline">已下載</string>
     <string name="my_top">我的首選</string>
@@ -66,7 +57,6 @@
     <string name="library_artist_empty">媒體庫藝人將顯示在這裡</string>
     <string name="library_album_empty">媒體庫專輯將顯示在這裡</string>
     <string name="library_playlist_empty">您的播放清單將顯示在這裡</string>
-    <!-- Playlist -->
     <string name="liked_songs">喜歡的歌曲</string>
     <string name="downloaded_songs">已下載的歌曲</string>
     <string name="sync_playlist">同步播放清單</string>
@@ -75,12 +65,10 @@
     <string name="delete_playlist_confirm">確定要删除播放清單“%s”嗎？</string>
     <string name="elements_selected">選擇了 %1$d 個元件</string>
     <string name="allows_for_sync_witch_youtube">注意：這會允許和 YouTube Music 同步。這個操作以後無法更改。</string>
-    <!-- Button -->
     <string name="retry">重試</string>
     <string name="radio">電台</string>
     <string name="shuffle">隨機播放</string>
     <string name="reset">重置</string>
-    <!-- Menu -->
     <string name="details">細項</string>
     <string name="edit">編輯</string>
     <string name="start_radio">開啟電台</string>
@@ -108,7 +96,6 @@
     <string name="like_all">喜歡全部</string>
     <string name="dislike_all">不喜歡全部</string>
     <string name="tempo_and_pitch">速度和音調</string>
-    <!-- Sort menu -->
     <string name="sort_by_create_date">新增時間</string>
     <string name="sort_by_last_updated">更新日期</string>
     <string name="sort_by_name">名稱</string>
@@ -118,7 +105,6 @@
     <string name="sort_by_length">長度</string>
     <string name="sort_by_play_time">播放時間</string>
     <string name="sort_by_custom">自訂順序</string>
-    <!-- Dialog -->
     <string name="media_id">媒體 ID</string>
     <string name="mime_type">MIME 類型</string>
     <string name="codecs">編碼</string>
@@ -152,7 +138,6 @@
     <string name="add_anyway">仍然要增加</string>
     <string name="duplicates_description_single">這首歌已經在您的播放清單中</string>
     <string name="duplicates_description_multiple">%d 首歌已在您的播放清單中</string>
-    <!-- Noun -->
     <plurals name="n_song">
         <item quantity="other">%d 首歌曲</item>
     </plurals>
@@ -180,13 +165,11 @@
     <plurals name="n_time">
         <item quantity="other">%d 次</item>
     </plurals>
-    <!-- Snackbar -->
     <string name="playlist_imported">已匯入此播放清單</string>
     <string name="imported_playlist">已匯入的播放清單</string>
     <string name="removed_song_from_playlist">已將「%s」從播放清單移除</string>
     <string name="playlist_synced">播放清單已同步</string>
     <string name="undo">復原</string>
-    <!-- Player -->
     <string name="lyrics_not_found">沒有歌詞</string>
     <string name="sleep_timer">睡眠定時器</string>
     <string name="end_of_song">歌曲播畢</string>
@@ -199,7 +182,6 @@
     <string name="error_unknown">未知的錯誤</string>
     <string name="seek_backward">倒退5秒</string>
     <string name="seek_forward">快進5秒</string>
-    <!-- Player action -->
     <string name="action_like">按讚</string>
     <string name="action_remove_like">收回讚</string>
     <string name="action_shuffle_on">隨機播放開啟</string>
@@ -207,13 +189,10 @@
     <string name="repeat_mode_off">重複播放關閉</string>
     <string name="repeat_mode_one">重複播放這首歌曲</string>
     <string name="repeat_mode_all">重複待播清單</string>
-    <!-- Queue Title -->
     <string name="queue_all_songs">所有曲目</string>
     <string name="queue_searched_songs">搜尋的歌曲</string>
     <string name="similar_content">相似的內容</string>
-    <!-- Notification name -->
     <string name="music_player">音樂播放器</string>
-    <!-- Settings -->
     <string name="settings">設定</string>
     <string name="login_settings">登入設定</string>
     <string name="use_login_for_browse">登入以瀏覽Premium內容</string>
@@ -429,4 +408,168 @@
     <string name="clear_song_cache_confirmation">您確定要清除歌曲快取嗎？這樣會釋出空間，但可能會暫時影響播放性能。</string>
     <string name="clear_image_cache_confirmation">您確定要清除圖片快取嗎？這樣會重新下載專輯封面和藝人圖片。</string>
     <string name="confirm">確認</string>
+    <string name="Rotatelyricsbackground">旋轉歌詞背景</string>
+    <string name="SmallButtonsShape">小按鈕形狀</string>
+    <string name="accessibility_permission_desc">此應用程式需要輔助使用權限來偵測快速設定。</string>
+    <string name="accessibility_permission_needed">需要輔助使用權限</string>
+    <string name="action_login">登入</string>
+    <string name="add_to_queue_content_desc">加入待播清單</string>
+    <string name="advanced_desc">變更歌曲的速度和音調</string>
+    <string name="album_text">專輯</string>
+    <string name="and">與</string>
+    <string name="animate_lyrics">動畫歌詞</string>
+    <string name="animate_lyrics_desc">在歌詞之間平滑切換</string>
+    <string name="app_info">應用程式資訊</string>
+    <string name="apple_music">Apple Music</string>
+    <string name="auto_playlist">自動播放清單</string>
+    <string name="auto_scroll">自動捲動</string>
+    <string name="avatar_selection">選擇頭像</string>
+    <string name="back">返回</string>
+    <string name="background_color">背景顏色</string>
+    <string name="backup_success">備份成功</string>
+    <string name="backup_upload_error">上傳備份時發生錯誤</string>
+    <string name="backup_with_cloud">建立本機備份並上傳至雲端</string>
+    <string name="blue_initial_avatar">藍色首字母頭像</string>
+    <string name="by_text">"由 "</string>
+    <string name="cache_clearing">正在清除…</string>
+    <string name="changing_language">正在變更語言…</string>
+    <string name="check_out_album_share">快來看看 %2 的 %1，就在 YouTube Music：%3</string>
+    <string name="choose_predefined_avatar">選擇預設頭像</string>
+    <string name="clear">清除</string>
+    <string name="cloud_upload_disabled_description">備份將僅儲存在本機</string>
+    <string name="cloud_upload_enabled_description">備份將上傳至 filebin.net</string>
+    <string name="cloud_upload_title">自動雲端上傳</string>
+    <string name="community">社群</string>
+    <string name="cover_color">封面顏色</string>
+    <string name="customize_colors">自訂顏色</string>
+    <string name="customize_image">自訂圖片</string>
+    <string name="customize_lyrics_image">自訂歌詞圖片</string>
+    <string name="details_desc">查看歌曲資訊</string>
+    <string name="discord_use_details">使用細節取代狀態</string>
+    <string name="discord_use_details_description">突出顯示歌名而非藝人名稱</string>
+    <string name="dots_pattern_avatar">點狀圖案頭像</string>
+    <string name="equalizer_avatar">等化器頭像</string>
+    <string name="equalizer_desc">調整音訊等化器</string>
+    <string name="error_generating_image">產生圖片時發生錯誤</string>
+    <string name="error_saving_image">儲存圖片時發生錯誤</string>
+    <string name="from_cover">來自封面</string>
+    <string name="generating_image">正在產生圖片</string>
+    <string name="geometric_avatar_1">幾何頭像 1</string>
+    <string name="geometric_avatar_2">幾何頭像 2</string>
+    <string name="geometric_avatar_3">幾何頭像 3</string>
+    <string name="geometric_avatar_4">幾何頭像 4</string>
+    <string name="geometric_avatar_5">幾何頭像 5</string>
+    <string name="geometric_avatar_6">幾何頭像 6</string>
+    <string name="gradient_pattern_avatar">漸層圖案頭像</string>
+    <string name="grant_permission">授予權限</string>
+    <string name="granted">已授予</string>
+    <string name="green_initial_avatar">綠色首字母頭像</string>
+    <string name="headphones_avatar">耳機頭像</string>
+    <string name="hide_controls">隱藏控制項</string>
+    <string name="hide_on_qs">在快速設定中隱藏</string>
+    <string name="hide_on_qs_desc">開啟通知列時隱藏</string>
+    <string name="hour">小時</string>
+    <string name="hours">小時</string>
+    <string name="info_button">資訊</string>
+    <string name="language">應用程式語言</string>
+    <string name="live_media">即時媒體</string>
+    <string name="live_media_compatibility_message">即時媒體專為 Android 16 以上版本設計。在您目前的 Android 版本上，它將作為標準通知運作，可能無法提供完整的動態媒體體驗（如狀態列膠囊）。</string>
+    <string name="live_media_compatibility_title">相容性警告</string>
+    <string name="live_media_desc">即時媒體為 Vivi Music 播放提供動態通知與狀態列膠囊。</string>
+    <string name="loading_lyrics">正在載入歌詞</string>
+    <string name="manage">管理</string>
+    <string name="max_selection_limit">最大選擇限制：%1</string>
+    <string name="minutes">分鐘</string>
+    <string name="more">更多</string>
+    <string name="more_options">更多選項</string>
+    <string name="more_options_content_desc">更多選項</string>
+    <string name="music_note_avatar">音符頭像</string>
+    <string name="navigation_error">導覽錯誤</string>
+    <string name="next_action">下一首</string>
+    <string name="notification_body">通知內容</string>
+    <string name="notification_listener_permission_desc">此應用程式需要通知存取權限來偵測播放並管理即時媒體通知。</string>
+    <string name="notification_listener_permission_needed">需要通知接聽程式權限</string>
+    <string name="notifications_disabled">通知已停用</string>
+    <string name="notifications_enabled">通知已啟用</string>
+    <string name="of_music">的音樂</string>
+    <string name="orange_initial_avatar">橘色首字母頭像</string>
+    <string name="pause_action">暫停</string>
+    <string name="permissions">權限</string>
+    <string name="pill_content_desc">配置狀態列膠囊的內容</string>
+    <string name="pill_elapsed_time">已播放時間</string>
+    <string name="pill_elapsed_time_desc">在膠囊中顯示播放位置</string>
+    <string name="pill_remaining_time">剩餘時間</string>
+    <string name="pill_remaining_time_desc">在膠囊中顯示歌曲剩餘時間</string>
+    <string name="pill_song_title">歌名</string>
+    <string name="pill_song_title_desc">在膠囊中顯示曲目名稱</string>
+    <string name="play_action">播放</string>
+    <string name="playing_from">"正在播放："</string>
+    <string name="playlist_add_local_to_synced_note">注意：不支援將本機歌曲加入同步/遠端播放清單。其他組合皆有效</string>
+    <string name="playlist_description_start">這份精心製作的播放清單包含</string>
+    <string name="playlist_duration_description">總播放時長為</string>
+    <string name="playlist_enjoy_message">享受您的聆聽體驗</string>
+    <string name="please_wait">請稍候</string>
+    <string name="presets">預設主題</string>
+    <string name="previous_action">上一首</string>
+    <string name="previous_action_fixed">上一首</string>
+    <string name="problem_solver">問題解決工具</string>
+    <string name="processing">正在處理</string>
+    <string name="processing_songs">正在處理歌曲…</string>
+    <string name="purple_initial_avatar">紫色首字母頭像</string>
+    <string name="queue_label">待播清單</string>
+    <string name="red_initial_avatar">紅色首字母頭像</string>
+    <string name="reset_button">重設</string>
+    <string name="saved">已儲存</string>
+    <string name="secondary_text_color">次要文字顏色</string>
+    <string name="select_theme">選擇主題</string>
+    <string name="selection_mode_active">選取模式已啟動</string>
+    <string name="share_as_image">以圖片分享</string>
+    <string name="share_as_text">以文字分享</string>
+    <string name="share_lyrics">分享歌詞</string>
+    <string name="share_lyrics_image">以圖片分享歌詞</string>
+    <string name="share_selected">分享選取的內容</string>
+    <string name="show_action_buttons">顯示操作按鈕</string>
+    <string name="show_action_buttons_desc">控制項如 播放/暫停、下一首、上一首</string>
+    <string name="show_album_art">顯示專輯封面</string>
+    <string name="show_album_art_desc">在通知中顯示封面圖</string>
+    <string name="show_album_name">顯示專輯名稱</string>
+    <string name="show_album_name_desc">在細節中顯示專輯名稱</string>
+    <string name="show_artist_name">顯示藝人名稱</string>
+    <string name="show_artist_name_desc">在元數據中包含藝人名稱</string>
+    <string name="show_controls">顯示控制項</string>
+    <string name="show_progress">顯示進度</string>
+    <string name="show_progress_desc">顯示歌曲進度條</string>
+    <string name="show_timestamps">顯示時間戳記</string>
+    <string name="show_timestamps_desc">已播放時長與總時長</string>
+    <string name="status_bar_pill">狀態列膠囊</string>
+    <string name="subscribe">訂閱</string>
+    <string name="subscribed">已訂閱</string>
+    <string name="tap_to_open">點擊開啟</string>
+    <string name="teal_initial_avatar">青色首字母頭像</string>
+    <string name="tertiary_color_style">三級顏色</string>
+    <string name="text_color">文字顏色</string>
+    <string name="understood">了解</string>
+    <string name="uploaded_playlist">已上傳</string>
+    <string name="uploading_backup">正在上傳備份…</string>
+    <string name="visitor_data_description">如果您遇到 YouTube 連線問題，重設 VISITOR_DATA 可能會有幫助。</string>
+    <string name="visitor_data_info_button">這是什麼？</string>
+    <string name="visitor_data_info_confirm">知道了</string>
+    <string name="visitor_data_info_intro">VISITOR_DATA 是 YouTube 用來追蹤工作階段的識別碼。當它毀損時，可能會導致：</string>
+    <string name="visitor_data_info_note">這適用於匿名使用者和已登入的使用者。</string>
+    <string name="visitor_data_info_problems">• 連線錯誤
+• 載入內容問題
+• 搜尋失敗
+• 播放中斷</string>
+    <string name="visitor_data_info_solution">重設 VISITOR_DATA 會產生新的識別碼，通常能解決這些問題。</string>
+    <string name="visitor_data_info_title">什麼是 VISITOR_DATA？</string>
+    <string name="visitor_data_reset_button">重設</string>
+    <string name="visitor_data_reset_cancel">取消</string>
+    <string name="visitor_data_reset_confirm">重設</string>
+    <string name="visitor_data_reset_message">您確定要重設 VISITOR_DATA 嗎？這將為 YouTube 產生新的識別碼，並可能修復連線問題。
+
+應用程式將自動重啟。</string>
+    <string name="visitor_data_reset_title">重設 VISITOR_DATA</string>
+    <string name="visitor_data_title">故障排除</string>
+    <string name="waves_pattern_avatar">波浪圖案頭像</string>
+    <string name="widget_title">音樂小工具</string>
 </resources>
