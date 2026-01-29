@@ -90,3 +90,4 @@ app/release
 output-metadata.json
 
 BuildAPK.bat
+.sisyphus/
