@@ -1,8 +1,11 @@
 name: Build Signed APKs (Manual)
 
-# 只保留 workflow_dispatch，表示必須手動按按鈕才會開始
 on:
   workflow_dispatch:
+
+# 強制 GitHub Actions 使用 Node.js 24 執行環境
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -23,7 +26,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # 建立 keystore 資料夾並將金鑰解碼到正確路徑 (配合 app/build.gradle.kts 的設定)
       - name: Decode Keystore
         env:
           ENCODED_STRING: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
@@ -31,7 +33,6 @@ jobs:
           mkdir -p app/keystore
           echo $ENCODED_STRING | base64 -d > app/keystore/release.keystore
 
-      # 執行編譯，更新環境變數名稱以符合 app/build.gradle.kts，並加入 API Key
       - name: Build APKs
         env:
           STORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
@@ -40,9 +41,14 @@ jobs:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
           TOGETHER_BEARER_TOKEN: ${{ secrets.TOGETHER_BEARER_TOKEN }}
-        run: ./gradlew assembleUniversalDebug assembleUniversalRelease --stacktrace
+        # 確保編譯 Universal Release 並確認產出檔名
+        run: |
+          ./gradlew assembleUniversalRelease --stacktrace
+          # 確保產出的檔名與 Updater.kt 要求的 app-universal-release.apk 一致
+          cd app/build/outputs/apk/universal/release/
+          mv *.apk app-universal-release.apk || true
 
-      - name: Upload Debug APK
+      - name: Upload Debug APK (Manual Build)
         uses: actions/upload-artifact@v4
         with:
           name: opentune-debug-apk
@@ -52,4 +58,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: opentune-release-signed-apk
-          path: app/build/outputs/apk/universal/release/*.apk
+          path: app/build/outputs/apk/universal/release/app-universal-release.apk

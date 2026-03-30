@@ -10,6 +10,10 @@ on:
       - '*.md'
   workflow_dispatch:
 
+# 強制 GitHub Actions 使用 Node.js 24 執行環境
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,9 +45,6 @@ jobs:
           cache-read-only: false
 
       # ── 5. SIGNING ─────────────────────────────────────────────────────────────
-      #   - Si DEBUG_KEYSTORE_BASE64 existe → lo decodifica y lo usa (firma consistente)
-      #   - Si no existe               → genera uno aleatorio con aviso (firma efímera)
-      # En ambos casos termina con los env vars de firma configurados.
       - name: Setup debug keystore & signing env vars
         env:
           KEYSTORE_SECRET: ${{ secrets.DEBUG_KEYSTORE_BASE64 }}
@@ -60,19 +61,7 @@ jobs:
               -alias androiddebugkey \
               -keyalg RSA -keysize 2048 -validity 10000 \
               -dname "C=US, O=Android, CN=Android Debug"
-            echo ""
-            echo "════════════════════════════════════════════════════════"
-            echo "⚠️  DEBUG_KEYSTORE_BASE64 no está configurado."
-            echo "    Este APK usa una firma aleatoria — no podrás instalar"
-            echo "    esta build sobre una anterior sin desinstalarla antes."
-            echo ""
-            echo "    Para fijar esta firma de forma permanente, copia el"
-            echo "    bloque de abajo y añádelo en:"
-            echo "    Settings → Secrets and variables → Actions → [New Repository Secret]"
-            echo "    Nombre del secret: DEBUG_KEYSTORE_BASE64"
-            echo "════════════════════════════════════════════════════════"
             base64 "$RUNNER_TEMP/keystore/prerelease.keystore"
-            echo "════════════════════════════════════════════════════════"
           fi
           echo "MUSIC_DEBUG_KEYSTORE_FILE=$RUNNER_TEMP/keystore/prerelease.keystore" >> $GITHUB_ENV
           echo "MUSIC_DEBUG_SIGNING_STORE_PASSWORD=android" >> $GITHUB_ENV
@@ -80,9 +69,6 @@ jobs:
           echo "MUSIC_DEBUG_SIGNING_KEY_ALIAS=androiddebugkey" >> $GITHUB_ENV
 
       # ── 6. BUILD ───────────────────────────────────────────────────────────────
-      # --build-cache       → reutiliza outputs de tareas cacheadas
-      # --configuration-cache → cachea la fase de configuración de Gradle
-      # --parallel          → ejecuta tareas independientes en paralelo
       - name: Build Debug APK
         env:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}

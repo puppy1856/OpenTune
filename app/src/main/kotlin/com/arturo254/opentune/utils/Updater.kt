@@ -57,7 +57,7 @@ data class UpdateInfo(
     val publishedAt: String,
 )
 
-private const val APK_ASSET_NAME = "app-release.apk"
+private const val APK_ASSET_NAME = "app-universal-release.apk"
 
 private data class ReleasesNetworkResult(
     val status: HttpStatusCode,
