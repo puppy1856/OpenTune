@@ -17,10 +17,10 @@
     <string name="months">月</string>
     <string name="years">年</string>
     <string name="continuous">繼續</string>
-    <string name="liked">我的喜愛</string>
+    <string name="liked">我的最愛</string>
     <string name="offline">已下載</string>
     <string name="my_top">我的排行榜</string>
-    <string name="cached_playlist">已快取</string>
+    <string name="cached_playlist">已緩存</string>
     <string name="sync_playlist">同步播放清單</string>
     <string name="sync_disabled">同步已停用</string>
     <string name="elements_selected">已選取 %1$d 個項目</string>
@@ -54,8 +54,8 @@
     <string name="no_tags_available">沒有可用標籤，請先建立一個</string>
     <string name="manage_playlist_tags">播放清單標籤</string>
     <string name="manage_playlist_tags_desc">建立並管理標籤，整理您的播放清單</string>
-    <string name="like_all">全部喜愛</string>
-    <string name="dislike_all">全部不喜愛</string>
+    <string name="like_all">全部最愛</string>
+    <string name="dislike_all">全部取消最愛</string>
     <string name="sort_by_last_updated">最後更新日期</string>
     <string name="link_copied">連結已複製到剪貼簿</string>
     <string name="starting_radio">正在開啟電台</string>
@@ -102,10 +102,10 @@
     <string name="last_song_listened">基於最近聽過的歌曲</string>
     <string name="app_language">應用程式語言</string>
     <string name="configure_app_language">設定應用程式語言</string>
-    <string name="intent_app_language_not_found">找不到應用程式的語言設定，請手動配置</string>
+    <string name="intent_app_language_not_found">找不到應用程式的語言設定，請手動設置</string>
     <string name="open_supported_links">預設開啟支援的連結</string>
-    <string name="configure_supported_links">配置支援的連結</string>
-    <string name="intent_supported_links_not_found">找不到支援的連結設定，請手動配置</string>
+    <string name="configure_supported_links">設置支援的連結</string>
+    <string name="intent_supported_links_not_found">找不到支援的連結設定，請手動設置</string>
     <string name="set_first_lyrics_provider">首選歌詞提供者</string>
     <string name="enable_similar_content">啟用類似內容</string>
     <string name="similar_content_desc">當播放佇列結束時，自動添加更多相似歌曲</string>
@@ -116,11 +116,11 @@
     <string name="import_csv">匯入「csv」播放清單</string>
     <string name="playlist_add_local_to_synced_note">提示：本機歌曲無法加入同步歌單，除此之外的操作均受支援</string>
     <string name="auto_download_on_like">自動下載</string>
-    <string name="auto_download_on_like_desc">自動下載喜愛的歌曲</string>
+    <string name="auto_download_on_like_desc">自動下載最愛的歌曲</string>
     <string name="swipe_sensitivity">迷你播放器滑動靈敏度</string>
     <string name="swipe_sensitivity_desc">調整切換歌曲時滑動手勢的靈敏度</string>
-    <string name="clear_song_cache_dialog">您確定要清除所有快取的歌曲嗎？</string>
-    <string name="clear_image_cache_dialog">您確定要清除所有快取的圖片嗎？</string>
+    <string name="clear_song_cache_dialog">您確定要清除所有暫存的歌曲嗎？</string>
+    <string name="clear_image_cache_dialog">您確定要清除所有暫存的圖片嗎？</string>
     <string name="clear_downloads_dialog">您確定要清除所有下載嗎？</string>
     <string name="disable">停用</string>
     <string name="pause_remote_listen_history">暫停分享與 YouTube Music 的聆聽紀錄</string>
@@ -190,12 +190,12 @@
     <string name="lyrics_romanize_japanese">日文歌詞羅馬拼音</string>
     <string name="lyrics_romanize_korean">韓文歌詞羅馬拼音</string>
     <string name="auto_playlists">自動播放清單</string>
-    <string name="show_liked_playlist">顯示「我的喜愛」播放清單</string>
+    <string name="show_liked_playlist">顯示「我的最愛」播放清單</string>
     <string name="show_downloaded_playlist">顯示「已下載」播放清單</string>
     <string name="show_top_playlist">顯示「排行榜」播放清單</string>
     <string name="show_cached_playlist">顯示「已快取」播放清單</string>
-    <string name="advanced_login">使用權杖登入</string>
-    <string name="token_hidden">點擊顯示權杖</string>
+    <string name="advanced_login">使用令牌登入</string>
+    <string name="token_hidden">點擊顯示令牌</string>
     <string name="token_shown">再次點擊以複製或編輯</string>
     <string name="ytm_sync">自動同步您的 YouTube Music 帳號</string>
     <string name="yt_sync">帳戶自動同步</string>
@@ -228,7 +228,7 @@
         <item quantity="other">%d 個項目</item>
     </plurals>
     <string name="secondary_color_style">次要</string>
-    <string name="token_adv_login_description">這是一種進階登入方式。作為網頁端的備選方案，您可以直接在此輸入或更新您的登入權杖 (Token)。例如，這可以提高在多台裝置上的登入速度。請注意，若權杖格式無效導致程式無法解析，將不被接受。</string>
+    <string name="token_adv_login_description">這是一種進階登入方式。作為網頁端的備選方案，您可以直接在此輸入或更新您的登入令牌 (Token)。例如，這可以提高在多台裝置上的登入速度。請注意，若令牌格式無效導致程式無法解析，將不被接受。</string>
     <plurals name="n_time">
         <item quantity="other">%d 倍</item>
     </plurals>

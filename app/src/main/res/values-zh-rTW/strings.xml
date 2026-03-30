@@ -9,11 +9,11 @@
         <item quantity="other">已選取 %d 個項目</item>
     </plurals>
     <string name="history">紀錄</string>
-    <string name="mood_and_genres">情境與樂風</string>
+    <string name="mood_and_genres">情感與風格</string>
     <string name="account">帳號</string>
     <string name="quick_picks">快速選擇</string>
     <string name="quick_picks_empty">聆聽更多歌曲以產生您的精選內容</string>
-    <string name="forgotten_favorites">被遺忘的喜愛內容</string>
+    <string name="forgotten_favorites">被遺忘的最愛內容</string>
     <string name="keep_listening">繼續收聽</string>
     <string name="your_youtube_playlists">您的 YouTube 播放清單</string>
     <string name="similar_to">相似內容</string>
@@ -49,17 +49,17 @@
     <string name="library_playlist_empty">您的播放清單會顯示在這裡</string>
     <string name="from_your_library">來自您的媒體庫</string>
     <string name="other_versions">其他版本</string>
-    <string name="liked_songs">喜愛的歌曲</string>
+    <string name="liked_songs">最愛的歌曲</string>
     <string name="downloaded_songs">下載的歌曲</string>
     <string name="playlist_is_empty">播放清單是空的</string>
     <string name="remove_download_playlist_confirm">確定要從已下載儲存空間中刪除「%s」播放清單內的所有歌曲嗎？</string>
     <string name="retry">重試</string>
-    <string name="radio">電台</string>
+    <string name="radio">廣播</string>
     <string name="shuffle">隨機播放</string>
     <string name="reset">重設</string>
     <string name="details">詳情</string>
     <string name="edit">編輯</string>
-    <string name="start_radio">開啟電台</string>
+    <string name="start_radio">開啟廣播</string>
     <string name="play">播放</string>
     <string name="play_next">下一首播放</string>
     <string name="add_to_queue">加入佇列</string>
@@ -89,7 +89,7 @@
     <string name="search_online">線上搜尋</string>
     <string name="action_sync">同步</string>
     <string name="advanced">進階</string>
-    <string name="tempo_and_pitch">速度與音高</string>
+    <string name="tempo_and_pitch">節奏與音高</string>
     <string name="tempo">播放速度</string>
     <string name="pitch">音高</string>
     <string name="pitch_mode_semitones_short">半音</string>
@@ -111,7 +111,7 @@
     <string name="update_notification_title">有可用更新</string>
     <string name="download">下載</string>
     <string name="permissions_title">讓 OpenTune 發揮最佳效能</string>
-    <string name="permissions_subtitle">我們需要一些權限來可靠地播放與管理您的音樂，您隨時可以在系統設定中變更這些權限</string>
+    <string name="permissions_subtitle">我們需要一些權限來穩定地播放與管理您的音樂，您隨時可以在系統設定中變更這些權限</string>
     <string name="permission_storage_title">儲存空間存取</string>
     <string name="permission_storage_desc">播放時必須讀取下載的與本機音訊檔案</string>
     <string name="permission_notifications_title">通知</string>
@@ -134,10 +134,10 @@
     <string name="error_no_internet">無網路連接</string>
     <string name="error_timeout">連線逾時</string>
     <string name="error_unknown">未知錯誤</string>
-    <string name="action_like">喜愛</string>
-    <string name="action_like_all">全部喜愛</string>
-    <string name="action_remove_like">移除喜愛</string>
-    <string name="action_remove_like_all">移除所有喜愛</string>
+    <string name="action_like">最愛</string>
+    <string name="action_like_all">全部最愛</string>
+    <string name="action_remove_like">移除最愛</string>
+    <string name="action_remove_like_all">移除所有最愛</string>
     <string name="action_shuffle_off">關閉隨機播放</string>
     <string name="repeat_mode_off">關閉循環</string>
     <string name="repeat_mode_one">單曲循環</string>
@@ -573,7 +573,7 @@
     <string name="eq_bands">等化器頻段</string>
     <string name="eq_virtualizer">虛擬環繞聲</string>
     <string name="smart_trimmer">智慧清理</string>
-    <string name="smart_trimmer_description">智慧清理程式動態管理圖片與歌曲快取，自動剔除舊項目以節省磁碟空間。</string>
+    <string name="smart_trimmer_description">智慧清理程式動態管理圖片與歌曲快取，自動剔除舊項目以節省儲存空間。</string>
     <string name="listenbrainz_scrobbling">ListenBrainz 紀錄</string>
     <string name="open">開啟</string>
     <string name="show_nerd_stats">詳細統計資訊</string>
