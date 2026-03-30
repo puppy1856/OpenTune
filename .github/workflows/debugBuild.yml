@@ -84,12 +84,16 @@ jobs:
       # --configuration-cache → cachea la fase de configuración de Gradle
       # --parallel          → ejecuta tareas independientes en paralelo
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --build-cache --configuration-cache --parallel
+        env:
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
+          TOGETHER_BEARER_TOKEN: ${{ secrets.TOGETHER_BEARER_TOKEN }}
+        run: ./gradlew assembleUniversalDebug --build-cache --configuration-cache --parallel
 
       # ── 7. ARTIFACT ────────────────────────────────────────────────────────────
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: debug-apk-${{ github.ref_name }}-run${{ github.run_number }}
-          path: "app/build/outputs/apk/debug/*.apk"
+          path: "app/build/outputs/apk/universal/debug/*.apk"
           retention-days: 7
