@@ -227,7 +227,7 @@ object Updater {
         cachedEtag: String?,
     ): ReleasesNetworkResult {
         val response: HttpResponse =
-            client.get("https://api.github.com/repos/Arturo254/OpenTune/releases?per_page=$perPage") {
+            client.get("https://api.github.com/repos/puppy1856/OpenTune/releases?per_page=$perPage") {
                 headers {
                     append("Accept", "application/vnd.github+json")
                     append("User-Agent", "OpenTune")
@@ -320,11 +320,11 @@ object Updater {
      */
     private suspend fun resolveApkDownloadUrl(tagName: String): String {
         val fallback =
-            "https://github.com/Arturo254/OpenTune/releases/download/$tagName/$APK_ASSET_NAME"
+            "https://github.com/puppy1856/OpenTune/releases/download/$tagName/$APK_ASSET_NAME"
 
         return runCatching {
             val response = client.get(
-                "https://api.github.com/repos/Arturo254/OpenTune/releases/tags/$tagName"
+                "https://api.github.com/repos/puppy1856/OpenTune/releases/tags/$tagName"
             ) {
                 headers {
                     append("Accept", "application/vnd.github+json")
@@ -376,7 +376,7 @@ object Updater {
         }
 
     fun getLatestDownloadUrl(): String {
-        val baseUrl = "https://github.com/Arturo254/OpenTune/releases/latest/download/"
+        val baseUrl = "https://github.com/puppy1856/OpenTune/releases/latest/download/"
         val architecture = BuildConfig.ARCHITECTURE
         return baseUrl + "app-universal-release.apk"
     }
