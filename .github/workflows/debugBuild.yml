@@ -10,10 +10,6 @@ on:
       - '*.md'
   workflow_dispatch:
 
-# 強制 GitHub Actions 使用 Node.js 24 執行環境
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
