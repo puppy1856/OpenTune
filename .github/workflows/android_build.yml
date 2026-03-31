@@ -40,9 +40,8 @@ jobs:
         # 確保編譯 Universal Release 並確認產出檔名
         run: |
           ./gradlew assembleUniversalRelease --stacktrace
-          # 確保產出的檔名與 Updater.kt 要求的 app-universal-release.apk 一致
-          cd app/build/outputs/apk/universal/release/
-          mv *.apk app-universal-release.apk || true
+          # Ensure filename matches what Updater.kt expects
+          mv app/build/outputs/apk/universal/release/*.apk app/build/outputs/apk/universal/release/app-universal-release.apk || true
 
       - name: Upload Debug APK (Manual Build)
         uses: actions/upload-artifact@v4
