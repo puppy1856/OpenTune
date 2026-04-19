@@ -378,7 +378,7 @@ object Updater {
     fun getLatestDownloadUrl(): String {
         val baseUrl = "https://github.com/puppy1856/OpenTune/releases/latest/download/"
         val architecture = BuildConfig.ARCHITECTURE
-        return baseUrl + "app-universal-release.apk"
+        return baseUrl + "app-release.apk"
     }
 
     suspend fun getAllReleases(
