@@ -37,11 +37,11 @@ jobs:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
           TOGETHER_BEARER_TOKEN: ${{ secrets.TOGETHER_BEARER_TOKEN }}
-        # 確保編譯 Universal Release 並確認產出檔名
+        # 確保編譯 Release 並確認產出檔名
         run: |
           ./gradlew assembleUniversalRelease --stacktrace
           # Ensure filename matches what Updater.kt expects
-          mv app/build/outputs/apk/universal/release/*.apk app/build/outputs/apk/universal/release/app-universal-release.apk || true
+          mv app/build/outputs/apk/universal/release/*.apk app/build/outputs/apk/universal/release/app-release.apk || true
 
       - name: Upload Debug APK (Manual Build)
         uses: actions/upload-artifact@v4
@@ -52,5 +52,5 @@ jobs:
       - name: Upload Release APK (Signed)
         uses: actions/upload-artifact@v4
         with:
-          name: app-universal-release.apk
-          path: app/build/outputs/apk/universal/release/app-universal-release.apk
+          name: app-release.apk
+          path: app/build/outputs/apk/universal/release/app-release.apk
