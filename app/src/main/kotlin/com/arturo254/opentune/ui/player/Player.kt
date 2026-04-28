@@ -153,6 +153,7 @@ import com.arturo254.opentune.utils.rememberPreference
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import coil3.compose.AsyncImage
 import com.arturo254.opentune.constants.BlurRadiusKey
+import com.arturo254.opentune.ui.component.COLLAPSED_ANCHOR
 import com.skydoves.cloudy.cloudy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -548,10 +549,10 @@ fun BottomSheetPlayer(
     val dismissedBound = dynamicQueuePeekHeight + WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()
 
     val queueSheetState = rememberBottomSheetState(
-        dismissedBound = dismissedBound,
+        dismissedBound = 0.dp,
         expandedBound = state.expandedBound,
         collapsedBound = dismissedBound,
-        initialAnchor = 0
+        initialAnchor = COLLAPSED_ANCHOR
     )
 
     val lyricsSheetState = rememberBottomSheetState(
