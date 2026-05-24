@@ -720,4 +720,92 @@
     <string name="token_copied">權杖已複製到剪貼簿</string>
     <string name="no_visitor_data">未取得訪客數據，無法產生權杖</string>
     <string name="extracting_from_url">正在從網址擷取權杖...</string>
+
+    <!-- Speed Dial -->
+    <string name="speed_dial">快速播放</string>
+    <string name="speed_dial_random">隨機播放快速播放歌曲</string>
+    <string name="pin_to_speed_dial">釘選至快速播放</string>
+    <string name="remove_from_speed_dial">從快速播放移除</string>
+
+    <!-- Music Recognition -->
+    <string name="music_recognition">音樂識別</string>
+
+    <!-- Playback/Player Settings -->
+    <string name="playback_requires_youtube_music_confirmation">在 YouTube Music 中確認播放，然後返回 OpenTune。</string>
+    <string name="wakelock">播放期間保持 CPU 喚醒</string>
+    <string name="wakelock_desc">持用 CPU 喚醒鎖定以防止系統中斷音樂播放</string>
+    
+    <!-- External Downloader -->
+    <string name="external_downloader">外部下載器</string>
+    <string name="external_downloader_desc">透過套件名稱使用外部應用程式下載歌曲</string>
+    <string name="external_downloader_package">下載器應用程式套件</string>
+    <string name="external_downloader_package_desc">外部下載器應用程式的套件名稱（例如 com.deniscerri.ytdl）</string>
+    <string name="open_with_downloader">使用下載器開啟</string>
+    <string name="external_downloader_not_installed">未安裝外部下載器應用程式</string>
+    <string name="external_downloader_not_configured">未配置外部下載器。請至「設定 -> 播放器」中設定。</string>
+
+    <!-- Troubleshooter & About -->
+    <string name="contributors">貢獻者</string>
+    <string name="troubleshooter">疑難排解工具</string>
+    <string name="troubleshooter_desc">清除歌曲快取並重設過期的訪客資料，以解決播放錯誤。</string>
+    <string name="troubleshooter_confirm_desc">將清除暫存歌曲快取並重設訪客資料。下載和媒體庫不受影響。</string>
+    <string name="troubleshooter_run">執行疑難排解</string>
+    <string name="troubleshooter_running">正在套用修復…</string>
+    <string name="troubleshooter_done">已成功套用修復。如果問題仍然存在，請重新啟動應用程式。</string>
+    <string name="confirm">確認</string>
+    <string name="social_links">社群網路</string>
+    <string name="view_license">在 GitHub 上查看完整授權</string>
+    <string name="paste">貼上</string>
+    <string name="player_design_v7">沉浸式</string>
+    <string name="liquid_glass_navbar">流光玻璃導覽列</string>
+
+    <!-- Always On Display (AOD) -->
+    <string name="aod_screen_title">恆亮螢幕 (AOD)</string>
+    <string name="aod_style_title">AOD 樣式</string>
+    <string name="aod_style_classic">經典</string>
+    <string name="aod_style_background">環境藍調</string>
+    <string name="aod_style_minimal">極簡</string>
+    <string name="aod_style_large">沉浸</string>
+    <string name="aod_style_spotlight">聚光燈</string>
+    <string name="aod_style_classic_desc">居中專輯封面</string>
+    <string name="aod_style_background_desc">模糊背景封面</string>
+    <string name="aod_style_minimal_desc">僅顯示基本資訊</string>
+    <string name="aod_style_large_desc">全螢幕專輯封面</string>
+    <string name="aod_style_spotlight_desc">光暈效果</string>
+    <string name="aod_shape_title">專輯封面形狀</string>
+    <string name="aod_shape_rounded">圓角</string>
+    <string name="aod_shape_circle">圓形</string>
+    <string name="aod_shape_squircle">超橢圓</string>
+    <string name="aod_shape_diamond">菱形</string>
+    <string name="aod_shape_hexagon">六角形</string>
+    <string name="aod_shape_star">星形</string>
+    <string name="aod_shape_arch">拱形</string>
+    <string name="aod_shape_petal">花瓣</string>
+    <string name="aod_darkness_title">背景暗度</string>
+    <string name="aod_darkness_label">暗度層級</string>
+    <string name="aod_darkness_description">環境與聚光燈樣式的覆蓋圖層不透明度</string>
+    <string name="aod_art_size_title">專輯封面大小</string>
+    <string name="aod_art_size_label">相對大小</string>
+    <string name="aod_art_size_description">專輯封面所佔螢幕寬度的比例</string>
+    <string name="aod_visible_elements_title">顯示元素</string>
+    <string name="aod_show_title">顯示歌名</string>
+    <string name="aod_show_artist">顯示歌手</string>
+    <string name="aod_show_time">顯示時間</string>
+    <string name="aod_show_time_description">播放進度與總長度標籤</string>
+    <string name="aod_show_progress">顯示進度條</string>
+    <string name="aod_show_controls">顯示控制鍵</string>
+    <string name="aod_show_controls_description">上一首、播放/暫停、下一首</string>
+    <string name="aod_auto_activation_title">自動啟用</string>
+    <string name="aod_auto_activation_label">閒置時間</string>
+    <string name="aod_auto_activation_description">在選定的閒置時間後自動啟用 AOD</string>
+    <string name="aod_auto_never">永不</string>
+    <string name="aod_auto_15s">15 秒</string>
+    <string name="aod_auto_30s">30 秒</string>
+    <string name="aod_auto_1m">1 分鐘</string>
+    <string name="aod_auto_2m">2 分鐘</string>
+    <string name="aod_auto_never_short">永不</string>
+    <string name="aod_auto_2m_short">2 分鐘</string>
+    <string name="aod_fullscreen_title">全螢幕</string>
+    <string name="aod_fullscreen_label">沉浸模式</string>
+    <string name="aod_fullscreen_description">隱藏系統狀態列、導覽列與時鐘</string>
 </resources>

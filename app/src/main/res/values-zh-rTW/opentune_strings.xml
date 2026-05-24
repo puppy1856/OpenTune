@@ -266,4 +266,29 @@
     <string name="error_no_song_playing">目前無正在播放的歌曲</string>
     <string name="error_no_similar_songs">查無相似歌曲</string>
     <string name="error_automix_failed">獲取相似歌曲失敗</string>
+
+    <!-- Music Recognition -->
+    <string name="music_recognition_tap_to_listen">輕觸開始聆聽</string>
+    <string name="music_recognition_listening">正在聆聽…</string>
+    <string name="music_recognition_processing">正在處理…</string>
+    <string name="music_recognition_listen_again">重新聆聽</string>
+    <string name="music_recognition_no_match">未找到相符歌曲</string>
+    <string name="music_recognition_signature_failed">無法產生特徵碼</string>
+    <string name="music_recognition_recognition_failed">識別失敗</string>
+    <string name="music_recognition_open_shazam">使用 Shazam 開啟</string>
+    <string name="music_recognition_lyrics_preview">歌詞預覽</string>
+    <string name="music_recognition_permission_title">麥克風權限</string>
+    <string name="music_recognition_permission_desc">允許存取麥克風以識別附近的音樂。</string>
+    <string name="music_recognition_permission_action">允許</string>
+    <string name="music_recognition_error">發生錯誤</string>
+
+    <!-- Cloud Backup -->
+    <string name="cloud_backup">雲端備份</string>
+    <string name="cloud_backup_desc">自動將備份上傳到 Filebin</string>
+    <string name="cloud_upload_success">檔案已上傳：%s</string>
+    <string name="cloud_upload_failed">上傳錯誤：%s</string>
+    <string name="cloud_upload_error">上傳錯誤</string>
+    <string name="cloud_uploading">正在上傳到雲端：%d%%</string>
+    <string name="last_cloud_url">最新連結</string>
+    <string name="cloud_upload_error_detail">錯誤：%s</string>
 </resources>
