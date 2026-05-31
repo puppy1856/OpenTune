@@ -15,6 +15,8 @@ if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
 
+val vBuild = System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 0
+
 android {
     namespace = "com.arturo254.opentune"
     compileSdk = 36
@@ -99,6 +101,7 @@ android {
         }
         debug {
             applicationIdSuffix = ".debug"
+            versionNameSuffix = ".$vBuild-debug"
             isDebuggable = true
         }
     }
