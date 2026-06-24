@@ -8,6 +8,8 @@ package com.arturo254.opentune.ui.screens
 import com.arturo254.opentune.ui.screens.DownloadQueueScreen
 
 import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -51,6 +53,7 @@ import com.arturo254.opentune.constants.PureBlackKey
 import com.arturo254.opentune.ui.component.BottomSheet
 import com.arturo254.opentune.ui.component.BottomSheetMenu
 import com.arturo254.opentune.ui.component.LocalMenuState
+import com.arturo254.opentune.ui.component.WidgetSettings
 import com.arturo254.opentune.ui.component.rememberBottomSheetState
 import com.arturo254.opentune.ui.screens.BrowseScreen
 import com.arturo254.opentune.ui.screens.artist.ArtistAlbumsScreen
@@ -88,12 +91,14 @@ import com.arturo254.opentune.ui.screens.settings.ThemeCreatorScreen
 import com.arturo254.opentune.ui.screens.settings.UpdateScreen
 import com.arturo254.opentune.ui.screens.musicrecognition.MusicRecognitionRoute
 import com.arturo254.opentune.ui.screens.musicrecognition.MusicRecognitionScreen
+import com.arturo254.opentune.ui.screens.playlist.SpotifyPlaylistScreen
 import com.arturo254.opentune.ui.screens.settings.AODSettings
 
 import com.arturo254.opentune.ui.utils.ShowMediaInfo
 import com.arturo254.opentune.utils.rememberEnumPreference
 import com.arturo254.opentune.utils.rememberPreference
 
+@RequiresApi(Build.VERSION_CODES.R)
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.navigationBuilder(
     navController: NavHostController,
@@ -338,6 +343,22 @@ fun NavGraphBuilder.navigationBuilder(
         },
     ) {
         AODSettings(navController, scrollBehavior)
+    }
+
+
+    composable(
+        route = "spotify_playlist/{playlistId}",
+        arguments = listOf(
+            navArgument("playlistId") {
+                type = NavType.StringType
+            },
+        ),
+    ) {
+        SpotifyPlaylistScreen(navController, scrollBehavior)
+    }
+
+    composable("settings/widget") {
+        WidgetSettings(navController, scrollBehavior)
     }
     composable("settings/content") {
         ContentSettings(navController, scrollBehavior)

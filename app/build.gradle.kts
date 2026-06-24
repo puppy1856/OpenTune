@@ -84,8 +84,8 @@ android {
         applicationId = "com.Arturo254.opentune"
         minSdk = 26
         targetSdk = 36
-        versionCode = 130
-        versionName = "3.0.3"
+        versionCode = 131
+        versionName = "3.0.4"
 //        versionName = "3.0.2-$gitCommit"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -283,6 +283,7 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(project(":innertube"))
+    implementation(project(":spotify"))
     implementation(project(":kugou"))
     implementation(project(":lrclib"))
     implementation(project(":lastfm"))
@@ -302,6 +303,9 @@ dependencies {
     implementation(libs.ktor.server.cio)
     implementation(libs.ktor.server.websockets)
     implementation(libs.ktor.server.content.negotiation)
+
+    implementation(libs.glance.appwidget)
+    implementation(libs.glance.material3)
 
     coreLibraryDesugaring(libs.desugaring)
 

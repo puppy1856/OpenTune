@@ -48,6 +48,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.arturo254.opentune.LocalPlayerAwareWindowInsets
 import com.arturo254.opentune.R
+import com.arturo254.opentune.constants.CanvasSource
+import com.arturo254.opentune.constants.CanvasSourceKey
 import com.arturo254.opentune.constants.ChipSortTypeKey
 import com.arturo254.opentune.constants.DarkModeKey
 import com.arturo254.opentune.constants.DefaultOpenTabKey
@@ -140,9 +142,9 @@ fun AppearanceSettings(
         HidePlayerThumbnailKey,
         defaultValue = false
     )
-    val (OpenTuneCanvasEnabled, onOpenTuneCanvasEnabledChange) = rememberPreference(
-        OpenTuneCanvasKey,
-        defaultValue = false
+    val (canvasSource, setCanvasSource) = rememberEnumPreference(
+        key = CanvasSourceKey,
+        defaultValue = CanvasSource.AUTO,
     )
     val (thumbnailCornerRadius, onThumbnailCornerRadiusChange) = rememberPreference(
         key = ThumbnailCornerRadiusKey,
@@ -400,6 +402,7 @@ fun AppearanceSettings(
                     PlayerDesignStyle.V5 -> stringResource(R.string.player_design_v5)
                     PlayerDesignStyle.V6 -> stringResource(R.string.player_design_v6)
                     PlayerDesignStyle.V7 -> stringResource(R.string.player_design_v7)
+                    PlayerDesignStyle.V8 -> stringResource(R.string.Apple_Music)
                 }
             },
         )
@@ -455,13 +458,20 @@ fun AppearanceSettings(
             onCheckedChange = onHidePlayerThumbnailChange
         )
 
-//        SwitchPreference(
-//            title = { Text(stringResource(R.string.OpenTune_canvas)) },
-//            description = stringResource(R.string.OpenTune_canvas_desc),
-//            icon = { Icon(painterResource(R.drawable.motion_photos_on), null) },
-//            checked = OpenTuneCanvasEnabled,
-//            onCheckedChange = onOpenTuneCanvasEnabledChange
-//        )
+        ListPreference(
+            title = { Text("Canvas source") },
+            icon = { Icon(painterResource(R.drawable.motion_photos_on), null) },
+            selectedValue = canvasSource,
+            values = CanvasSource.entries,
+            valueText = { source ->
+                when (source) {
+                    CanvasSource.AUTO -> "Automático"
+                    CanvasSource.APPLE_MUSIC -> "Apple Music"
+                    CanvasSource.TIDAL -> "Tidal"
+                }
+            },
+            onValueSelected = setCanvasSource,
+        )
       
 
         ThumbnailCornerRadiusSelectorButton(
@@ -819,6 +829,7 @@ fun AppearanceSettings(
                     LibraryFilter.ALBUMS -> stringResource(R.string.albums)
                     LibraryFilter.PLAYLISTS -> stringResource(R.string.playlists)
                     LibraryFilter.LIBRARY -> stringResource(R.string.filter_library)
+                    LibraryFilter.SPOTIFY -> stringResource(R.string.spotify)
                 }
             },
             onValueSelected = onDefaultChipChange,
@@ -830,6 +841,13 @@ fun AppearanceSettings(
             description = "Estilos, formas y opciones de personalización",
             icon = { Icon(painterResource(R.drawable.dark_mode), null) },
             onClick = { navController.navigate("settings/appearance/always_on_display") }
+        )
+
+        PreferenceEntry(
+            title = { Text("Widget Settings") },
+            description = "Personaliza la apariencia del widget",
+            icon = { Icon(painterResource(R.drawable.buttons), null) },
+            onClick = { navController.navigate("settings/widget") }
         )
 
         SwitchPreference(

@@ -32,6 +32,9 @@ val UseNewLibraryDesignKey = booleanPreferencesKey("useNewLibraryDesign")
 val UseNewMiniPlayerDesignKey = booleanPreferencesKey("useNewMiniPlayerDesign")
 val HidePlayerThumbnailKey = booleanPreferencesKey("hidePlayerThumbnail")
 val OpenTuneCanvasKey = booleanPreferencesKey("OpenTuneCanvas")
+
+// Fuente del canvas: AUTO, APPLE_MUSIC, OPENTUNE, TIDAL
+val CanvasSourceKey = stringPreferencesKey("canvasSource")
 val ThumbnailCornerRadiusKey = floatPreferencesKey("thumbnailCornerRadius")
 val CropThumbnailToSquareKey = booleanPreferencesKey("cropThumbnailToSquare")
 val SeekExtraSeconds = booleanPreferencesKey("seekExtraSeconds")
@@ -72,7 +75,7 @@ val TogetherAllowGuestsToControlPlaybackKey = booleanPreferencesKey("together_al
 val TogetherRequireHostApprovalToJoinKey = booleanPreferencesKey("together_require_host_approval_to_join")
 val TogetherLastJoinLinkKey = stringPreferencesKey("together_last_join_link")
 val TogetherWelcomeShownKey = booleanPreferencesKey("together_welcome_shown")
-    
+
 // ListenBrainz scrobbling
 val ListenBrainzEnabledKey = booleanPreferencesKey("listenbrainz_enabled")
 val ListenBrainzTokenKey = stringPreferencesKey("listenbrainz_token")
@@ -386,7 +389,8 @@ enum class PlayerDesignStyle {
     V4,
     V5,
     V6,
-    V7
+    V7,
+    V8
 }
 
 enum class PlayerBackgroundStyle {
@@ -653,3 +657,38 @@ val AodClockFormatKey = booleanPreferencesKey("aod_clock_24h")
 val LyricsLineBlurKey = booleanPreferencesKey("lyricsLineBlur")
 
 val LyricsSyncOffsetKey = intPreferencesKey("lyrics_sync_offset")
+
+
+enum class CanvasSource {
+    AUTO,
+    APPLE_MUSIC,
+    TIDAL,
+}
+
+// Home Screen Widget (OpenTunePlayerWidget)
+
+enum class WidgetBackgroundMode {
+    BLUR,
+    DOMINANT_COLOR,
+    SOLID,
+}
+
+val WidgetBackgroundModeKey = stringPreferencesKey("widget_background_mode")
+
+/** Intensidad del scrim oscuro sobre el fondo (0.0 - 1.0), para mantener contraste del texto. */
+val WidgetScrimOpacityKey = floatPreferencesKey("widget_scrim_opacity")
+
+/** Radio de las esquinas del widget, en dp. */
+val WidgetCornerRadiusKey = floatPreferencesKey("widget_corner_radius")
+
+val WidgetShowProgressBarKey = booleanPreferencesKey("widget_show_progress_bar")
+
+
+val SpotifySpDcKey = stringPreferencesKey("spotify_sp_dc")
+val SpotifySpKeyKey = stringPreferencesKey("spotify_sp_key")
+val SpotifyAccessTokenKey = stringPreferencesKey("spotify_access_token")
+val SpotifyAccessTokenExpiresAtKey = longPreferencesKey("spotify_access_token_expires_at")
+val SpotifyAccountNameKey = stringPreferencesKey("spotify_account_name")
+val SpotifyAccountAvatarUrlKey = stringPreferencesKey("spotify_account_avatar_url")
+val ShowSpotifyPlaylistsKey = booleanPreferencesKey("show_spotify_playlists")
+val SpotifyLibraryPlaylistsCacheKey = stringPreferencesKey("spotify_library_playlists_cache")
