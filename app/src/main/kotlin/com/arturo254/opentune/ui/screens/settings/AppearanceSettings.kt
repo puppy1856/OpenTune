@@ -91,7 +91,9 @@ import com.arturo254.opentune.constants.OpenTuneCanvasKey
 import com.arturo254.opentune.constants.ThumbnailCornerRadiusKey
 import com.arturo254.opentune.constants.CropThumbnailToSquareKey
 import com.arturo254.opentune.constants.DisableBlurKey
+import com.arturo254.opentune.constants.EnableHapticFeedbackKey
 import com.arturo254.opentune.constants.LiquidGlassNavBarKey
+import com.arturo254.opentune.constants.PlayerFullscreenKey
 import com.arturo254.opentune.constants.UseLyricsV2Key
 import com.arturo254.opentune.ui.component.DefaultDialog
 import com.arturo254.opentune.ui.component.EnumListPreference
@@ -240,10 +242,16 @@ fun AppearanceSettings(
         it != PlayerBackgroundStyle.BLUR || Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     }
 
-    val (liquidGlassNavBar, onLiquidGlassNavBarChange) = rememberPreference(
-        LiquidGlassNavBarKey,
+    val (playerFullscreen, onPlayerFullscreenChange) = rememberPreference(
+        PlayerFullscreenKey,
         defaultValue = false
     )
+
+    val (hapticEnabled, onHapticEnabledChange) = rememberPreference(
+        EnableHapticFeedbackKey,
+        defaultValue = true
+    )
+
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
     val useDarkTheme =
@@ -324,6 +332,20 @@ fun AppearanceSettings(
             icon = { Icon(painterResource(R.drawable.palette), null) },
             checked = dynamicTheme,
             onCheckedChange = onDynamicThemeChange,
+        )
+
+        SwitchPreference(
+            title = { Text(stringResource(R.string.player_fullscreen)) },
+            icon = { Icon(painterResource(R.drawable.fullscreen), null) },
+            checked = playerFullscreen,
+            onCheckedChange = onPlayerFullscreenChange,
+        )
+
+        SwitchPreference(
+            title = { Text("Haptic feedback") },
+            icon = { Icon(painterResource(R.drawable.haptic), null) },
+            checked = hapticEnabled,
+            onCheckedChange = onHapticEnabledChange,
         )
 
         AnimatedVisibility(visible = !dynamicTheme || Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
@@ -879,14 +901,6 @@ fun AppearanceSettings(
             checked = slimNav,
             onCheckedChange = onSlimNavChange
         )
-
-        SwitchPreference(
-            title = { Text(stringResource(R.string.liquid_glass_navbar)) },
-            icon = { Icon(painterResource(R.drawable.blur_on), null) },
-            checked = liquidGlassNavBar,
-            onCheckedChange = onLiquidGlassNavBarChange,
-        )
-
 
         EnumListPreference(
             title = { Text(stringResource(R.string.grid_cell_size)) },

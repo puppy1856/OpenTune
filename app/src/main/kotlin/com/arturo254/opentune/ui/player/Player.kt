@@ -79,8 +79,13 @@ import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Surface
+import androidx.compose.material3.ToggleButton
+import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -107,6 +112,11 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.window.DialogWindowProvider
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.media3.common.C
 import androidx.media3.common.Player.STATE_BUFFERING
 import androidx.media3.common.Player.STATE_READY
@@ -157,6 +167,7 @@ import com.arturo254.opentune.constants.AodFullscreenKey
 import com.arturo254.opentune.constants.BlurRadiusKey
 import com.arturo254.opentune.constants.SeekExtraSeconds
 import com.arturo254.opentune.ui.component.COLLAPSED_ANCHOR
+import com.my.kizzy.gateway.entities.presence.Activity
 import com.skydoves.cloudy.cloudy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -183,6 +194,13 @@ fun BottomSheetPlayer(
     val context = LocalContext.current
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val menuState = LocalMenuState.current
+
+    val view = LocalView.current
+    val activity = context as? android.app.Activity
+    val activityWindow = activity?.window
+    val dialogWindow = (view.parent as? DialogWindowProvider)?.window
+    val window = dialogWindow ?: activityWindow
+
 
     val bottomSheetPageState = LocalBottomSheetPageState.current
 
@@ -211,9 +229,26 @@ fun BottomSheetPlayer(
     var keyboardSkipMultiplier by remember { mutableStateOf(1) }
     var lastKeyboardTapTime by remember { mutableLongStateOf(0L) }
 
+    val (playerFullscreen) = rememberPreference(
+        booleanPreferencesKey("player_fullscreen"),
+        defaultValue = false
+    )
+
+// Activar fullscreen al expandir
+    LaunchedEffect(state.isExpanded, playerFullscreen) {
+        if (state.isExpanded && playerFullscreen && window != null) {
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+            insetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            insetsController.hide(WindowInsetsCompat.Type.systemBars())
+        }
+    }
 
 
-    val (aodAutoTimeoutSeconds) = rememberPreference(AodAutoActivationKey, 30)
+
+
+    val (aodAutoTimeoutSeconds) = rememberPreference(AodAutoActivationKey, 0)
 
     var lastInteractionTime by remember { mutableLongStateOf(System.currentTimeMillis()) }
     var isAodActive by remember { mutableStateOf(false) }
@@ -465,60 +500,122 @@ fun BottomSheetPlayer(
         AlertDialog(
             properties = DialogProperties(usePlatformDefaultWidth = false),
             onDismissRequest = { showSleepTimerDialog = false },
+
             icon = {
-                Icon(
-                    painter = painterResource(R.drawable.bedtime),
-                    contentDescription = null
+                Surface(
+                    color = MaterialTheme.colorScheme.secondaryContainer,
+                    shape = CircleShape
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.bedtime),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .size(28.dp)
+                    )
+                }
+            },
+
+            title = {
+                Text(
+                    text = stringResource(R.string.sleep_timer),
+                    style = MaterialTheme.typography.headlineSmallEmphasized
                 )
             },
-            title = { Text(stringResource(R.string.sleep_timer)) },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        showSleepTimerDialog = false
-                        playerConnection.service.sleepTimer.start(sleepTimerValue.roundToInt())
-                    },
-                    shapes = ButtonDefaults.shapes(),
-                ) {
-                    Text(stringResource(android.R.string.ok))
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = { showSleepTimerDialog = false },
-                    shapes = ButtonDefaults.shapes(),
-                ) {
-                    Text(stringResource(android.R.string.cancel))
-                }
-            },
+
             text = {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+
+                    Text(
+                        text = sleepTimerValue.roundToInt().toString(),
+                        style = MaterialTheme.typography.displayMediumEmphasized,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+
                     Text(
                         text = pluralStringResource(
                             R.plurals.minute,
                             sleepTimerValue.roundToInt(),
                             sleepTimerValue.roundToInt()
                         ),
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = MaterialTheme.typography.titleMedium
                     )
+
+                    Spacer(Modifier.height(20.dp))
 
                     Slider(
                         value = sleepTimerValue,
                         onValueChange = { sleepTimerValue = it },
                         valueRange = 5f..120f,
                         steps = (120 - 5) / 5 - 1,
+                        modifier = Modifier.fillMaxWidth()
                     )
 
-                    OutlinedIconButton(
-                        onClick = {
+                    Spacer(Modifier.height(20.dp))
+
+                    ToggleButton(
+                        checked = false,
+                        onCheckedChange = {
                             showSleepTimerDialog = false
                             playerConnection.service.sleepTimer.start(-1)
-                        },
+                        }
                     ) {
+                        Icon(
+                            painter = painterResource(R.drawable.music_note),
+                            contentDescription = null
+                        )
+
+                        Spacer(Modifier.width(ToggleButtonDefaults.IconSpacing))
+
                         Text(stringResource(R.string.end_of_song))
                     }
                 }
             },
+
+            dismissButton = {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(
+                        ButtonGroupDefaults.ConnectedSpaceBetween
+                    )
+                ) {
+
+                    ToggleButton(
+                        checked = false,
+                        onCheckedChange = {
+                            showSleepTimerDialog = false
+                        },
+                        shapes = ButtonGroupDefaults.connectedLeadingButtonShapes()
+                    ) {
+                        Text(stringResource(android.R.string.cancel))
+                    }
+
+                    ToggleButton(
+                        checked = false,
+                        onCheckedChange = {
+                            showSleepTimerDialog = false
+
+                            playerConnection.service.sleepTimer.start(
+                                sleepTimerValue.roundToInt()
+                            )
+                        },
+                        shapes = ButtonGroupDefaults.connectedTrailingButtonShapes()
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.play),
+                            contentDescription = null
+                        )
+
+                        Spacer(Modifier.width(ToggleButtonDefaults.IconSpacing))
+
+                        Text(stringResource(android.R.string.ok))
+                    }
+                }
+            },
+
+            confirmButton = {}
         )
     }
 
