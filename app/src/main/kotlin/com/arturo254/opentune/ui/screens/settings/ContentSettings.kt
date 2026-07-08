@@ -4,8 +4,6 @@
  * Licensed Under GPL-3.0 | see git history for contributors
  */
 
-
-
 package com.arturo254.opentune.ui.screens.settings
 
 import android.content.Intent
@@ -21,6 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -39,6 +41,13 @@ import java.net.Proxy
 import java.util.Locale
 import androidx.core.net.toUri
 
+private fun getLanguageDisplayName(languageCode: String): String {
+    return when (languageCode) {
+        SYSTEM_DEFAULT -> "System Default"
+        else -> LanguageCodeToName[languageCode] ?: languageCode
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContentSettings(
@@ -47,33 +56,104 @@ fun ContentSettings(
 ) {
     val context = LocalContext.current
 
-    // Used only before Android 13
-    val (appLanguage, onAppLanguageChange) = rememberPreference(key = AppLanguageKey, defaultValue = SYSTEM_DEFAULT)
+    val (appLanguage, onAppLanguageChange) = rememberPreference(
+        key = AppLanguageKey,
+        defaultValue = SYSTEM_DEFAULT
+    )
 
-    val (contentLanguage, onContentLanguageChange) = rememberPreference(key = ContentLanguageKey, defaultValue = "system")
-    val (contentCountry, onContentCountryChange) = rememberPreference(key = ContentCountryKey, defaultValue = "system")
-    val (hideExplicit, onHideExplicitChange) = rememberPreference(key = HideExplicitKey, defaultValue = false)
-    val (hideVideo, onHideVideoChange) = rememberPreference(key = HideVideoKey, defaultValue = false)
-    val (proxyEnabled, onProxyEnabledChange) = rememberPreference(key = ProxyEnabledKey, defaultValue = false)
-    val (proxyType, onProxyTypeChange) = rememberEnumPreference(key = ProxyTypeKey, defaultValue = Proxy.Type.HTTP)
-    val (proxyUrl, onProxyUrlChange) = rememberPreference(key = ProxyUrlKey, defaultValue = "host:port")
-    val (streamBypassProxy, onStreamBypassProxyChange) = rememberPreference(key = StreamBypassProxyKey, defaultValue = false)
-    val (enableKugou, onEnableKugouChange) = rememberPreference(key = EnableKugouKey, defaultValue = true)
-    val (enableLrclib, onEnableLrclibChange) = rememberPreference(key = EnableLrcLibKey, defaultValue = true)
-    val (enableBetterLyrics, onEnableBetterLyricsChange) = rememberPreference(key = EnableBetterLyricsKey, defaultValue = true)
+    val (contentLanguage, onContentLanguageChange) = rememberPreference(
+        key = ContentLanguageKey,
+        defaultValue = "system"
+    )
+    val (contentCountry, onContentCountryChange) = rememberPreference(
+        key = ContentCountryKey,
+        defaultValue = "system"
+    )
+    val (hideExplicit, onHideExplicitChange) = rememberPreference(
+        key = HideExplicitKey,
+        defaultValue = false
+    )
+    val (hideVideo, onHideVideoChange) = rememberPreference(
+        key = HideVideoKey,
+        defaultValue = false
+    )
+    val (proxyEnabled, onProxyEnabledChange) = rememberPreference(
+        key = ProxyEnabledKey,
+        defaultValue = false
+    )
+    val (proxyType, onProxyTypeChange) = rememberEnumPreference(
+        key = ProxyTypeKey,
+        defaultValue = Proxy.Type.HTTP
+    )
+    val (proxyUrl, onProxyUrlChange) = rememberPreference(
+        key = ProxyUrlKey,
+        defaultValue = "host:port"
+    )
+    val (streamBypassProxy, onStreamBypassProxyChange) = rememberPreference(
+        key = StreamBypassProxyKey,
+        defaultValue = false
+    )
+    val (enableKugou, onEnableKugouChange) = rememberPreference(
+        key = EnableKugouKey,
+        defaultValue = true
+    )
+    val (enableLrclib, onEnableLrclibChange) = rememberPreference(
+        key = EnableLrcLibKey,
+        defaultValue = true
+    )
+    val (enableBetterLyrics, onEnableBetterLyricsChange) = rememberPreference(
+        key = EnableBetterLyricsKey,
+        defaultValue = true
+    )
     val (enableSimpMusicLyrics, onEnableSimpMusicLyricsChange) =
-        rememberPreference(key = EnableSimpMusicLyricsKey, defaultValue = true)
+        rememberPreference(
+            key = EnableSimpMusicLyricsKey,
+            defaultValue = true
+        )
     val (preferredProvider, onPreferredProviderChange) =
         rememberEnumPreference(
             key = PreferredLyricsProviderKey,
             defaultValue = PreferredLyricsProvider.LRCLIB,
         )
-    val (lyricsRomanizeJapanese, onLyricsRomanizeJapaneseChange) = rememberPreference(LyricsRomanizeJapaneseKey, defaultValue = true)
-    val (lyricsRomanizeKorean, onLyricsRomanizeKoreanChange) = rememberPreference(LyricsRomanizeKoreanKey, defaultValue = true)
-    val (preloadQueueLyricsEnabled, onPreloadQueueLyricsEnabledChange) = rememberPreference(PreloadQueueLyricsEnabledKey, defaultValue = true)
-    val (queueLyricsPreloadCount, onQueueLyricsPreloadCountChange) = rememberPreference(QueueLyricsPreloadCountKey, defaultValue = 1)
-    val (lengthTop, onLengthTopChange) = rememberPreference(key = TopSize, defaultValue = "50")
-    val (quickPicks, onQuickPicksChange) = rememberEnumPreference(key = QuickPicksKey, defaultValue = QuickPicks.QUICK_PICKS)
+    val (lyricsRomanizeJapanese, onLyricsRomanizeJapaneseChange) = rememberPreference(
+        LyricsRomanizeJapaneseKey,
+        defaultValue = true
+    )
+    val (lyricsRomanizeKorean, onLyricsRomanizeKoreanChange) = rememberPreference(
+        LyricsRomanizeKoreanKey,
+        defaultValue = true
+    )
+    val (preloadQueueLyricsEnabled, onPreloadQueueLyricsEnabledChange) = rememberPreference(
+        PreloadQueueLyricsEnabledKey,
+        defaultValue = true
+    )
+    val (queueLyricsPreloadCount, onQueueLyricsPreloadCountChange) = rememberPreference(
+        QueueLyricsPreloadCountKey,
+        defaultValue = 1
+    )
+    val (lengthTop, onLengthTopChange) = rememberPreference(
+        key = TopSize,
+        defaultValue = "50"
+    )
+    val (quickPicks, onQuickPicksChange) = rememberEnumPreference(
+        key = QuickPicksKey,
+        defaultValue = QuickPicks.QUICK_PICKS
+    )
+
+    var showLanguageSelector by remember { mutableStateOf(false) }
+
+    val languageOptions = remember {
+        LanguageCodeToName.map { (code, name) ->
+            LanguageOption(code = code, displayName = name)
+        }
+    }
+
+    var showProviderOrderDialog by remember { mutableStateOf(false) }
+
+    val (providerOrder, onProviderOrderChange) = rememberPreference(
+        key = ProviderOrderKey,
+        defaultValue = DefaultProviderOrder.joinToString(",") { it.name },
+    )
 
     Column(
         Modifier
@@ -81,6 +161,7 @@ fun ContentSettings(
             .verticalScroll(rememberScrollState()),
     ) {
         PreferenceGroupTitle(title = stringResource(R.string.general))
+
         ListPreference(
             title = { Text(stringResource(R.string.content_language)) },
             icon = { Icon(painterResource(R.drawable.language), null) },
@@ -92,17 +173,18 @@ fun ContentSettings(
             onValueSelected = { newValue ->
                 val locale = Locale.getDefault()
                 val languageTag = locale.toLanguageTag().replace("-Hant", "")
- 
+
                 YouTube.locale = YouTube.locale.copy(
                     hl = newValue.takeIf { it != SYSTEM_DEFAULT }
                         ?: locale.language.takeIf { it in LanguageCodeToName }
                         ?: languageTag.takeIf { it in LanguageCodeToName }
                         ?: "en"
                 )
- 
+
                 onContentLanguageChange(newValue)
             }
         )
+
         ListPreference(
             title = { Text(stringResource(R.string.content_country)) },
             icon = { Icon(painterResource(R.drawable.location_on), null) },
@@ -113,15 +195,15 @@ fun ContentSettings(
             },
             onValueSelected = { newValue ->
                 val locale = Locale.getDefault()
- 
+
                 YouTube.locale = YouTube.locale.copy(
                     gl = newValue.takeIf { it != SYSTEM_DEFAULT }
                         ?: locale.country.takeIf { it in CountryCodeToName }
                         ?: "US"
                 )
- 
+
                 onContentCountryChange(newValue)
-           }
+            }
         )
 
         SwitchPreference(
@@ -137,12 +219,17 @@ fun ContentSettings(
             checked = hideVideo,
             onCheckedChange = onHideVideoChange,
         )
-
         PreferenceGroupTitle(title = stringResource(R.string.app_language))
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             PreferenceEntry(
                 title = { Text(stringResource(R.string.app_language)) },
-                icon = { Icon(painterResource(R.drawable.language), null) },
+                subtitle = {
+                    Text(
+                        text = getLanguageDisplayName(appLanguage)
+                    )
+                },
+                icon = { Icon(painterResource(R.drawable.translate), null) },
                 onClick = {
                     context.startActivity(
                         Intent(
@@ -152,37 +239,28 @@ fun ContentSettings(
                     )
                 }
             )
-        }
-        // Support for Android versions before Android 13
-        else {
-            ListPreference(
+        } else {
+            PreferenceEntry(
                 title = { Text(stringResource(R.string.app_language)) },
-                icon = { Icon(painterResource(R.drawable.language), null) },
-                selectedValue = appLanguage,
-                values = listOf(SYSTEM_DEFAULT) + LanguageCodeToName.keys.toList(),
-                valueText = {
-                    LanguageCodeToName.getOrElse(it) { stringResource(R.string.system_default) }
+                subtitle = {
+                    Text(
+                        text = getLanguageDisplayName(appLanguage)
+                    )
                 },
-                onValueSelected = { langTag ->
-                    val newLocale = langTag
-                        .takeUnless { it == SYSTEM_DEFAULT }
-                        ?.let { Locale.forLanguageTag(it) }
-                        ?: Locale.getDefault()
-
-                    onAppLanguageChange(langTag)
-                    setAppLocale(context, newLocale)
-
-                }
+                icon = { Icon(painterResource(R.drawable.language), null) },
+                onClick = { showLanguageSelector = true }
             )
         }
 
         PreferenceGroupTitle(title = stringResource(R.string.proxy))
+
         SwitchPreference(
             title = { Text(stringResource(R.string.enable_proxy)) },
             icon = { Icon(painterResource(R.drawable.wifi_proxy), null) },
             checked = proxyEnabled,
             onCheckedChange = onProxyEnabledChange,
         )
+
         if (proxyEnabled) {
             Column {
                 ListPreference(
@@ -211,6 +289,7 @@ fun ContentSettings(
         }
 
         PreferenceGroupTitle(title = stringResource(R.string.lyrics))
+
         SwitchPreference(
             title = { Text(stringResource(R.string.enable_lrclib)) },
             icon = { Icon(painterResource(R.drawable.lyrics), null) },
@@ -235,26 +314,48 @@ fun ContentSettings(
             checked = enableSimpMusicLyrics,
             onCheckedChange = onEnableSimpMusicLyricsChange,
         )
-        ListPreference(
-            title = { Text(stringResource(R.string.set_first_lyrics_provider)) },
-            icon = { Icon(painterResource(R.drawable.lyrics), null) },
-            selectedValue = preferredProvider,
-            values = listOf(
-                PreferredLyricsProvider.LRCLIB,
-                PreferredLyricsProvider.KUGOU,
-                PreferredLyricsProvider.BETTER_LYRICS,
-                PreferredLyricsProvider.SIMPMUSIC,
-            ),
-            valueText = {
-                when (it) {
-                    PreferredLyricsProvider.LRCLIB -> "LrcLib"
-                    PreferredLyricsProvider.KUGOU -> "KuGou"
-                    PreferredLyricsProvider.BETTER_LYRICS -> "BetterLyrics"
-                    PreferredLyricsProvider.SIMPMUSIC -> "SimpMusic"
-                }
+
+        val savedOrder = remember(providerOrder) {
+            val parsed = providerOrder.split(",")
+                .mapNotNull { name -> PreferredLyricsProvider.entries.find { it.name == name } }
+
+            val missing = DefaultProviderOrder.filterNot { it in parsed }
+            (parsed + missing).ifEmpty { DefaultProviderOrder }
+        }
+
+        PreferenceEntry(
+            title = {
+                Text(stringResource(R.string.lyrics_provider_order))
             },
-            onValueSelected = onPreferredProviderChange,
+            subtitle = {
+                Text(
+                    stringResource(
+                        R.string.lyrics_provider_priority,
+                        savedOrder.joinToString(" → ") { it.displayName() }
+                    )
+                )
+            },
+            icon = { Icon(painterResource(R.drawable.lyrics), null) },
+            onClick = { showProviderOrderDialog = true },
         )
+
+        if (showProviderOrderDialog) {
+            DragDropLyricsProviderDialog(
+                providers = savedOrder,
+                selectedProvider = preferredProvider,
+                onDismiss = { showProviderOrderDialog = false },
+                onOrderConfirmed = { newOrder ->
+                    onProviderOrderChange(newOrder.joinToString(",") { it.name })
+
+                    val newPreferred = newOrder.firstOrNull() ?: PreferredLyricsProvider.LRCLIB
+                    if (newPreferred != preferredProvider) {
+                        onPreferredProviderChange(newPreferred)
+                    }
+                },
+                valueText = { it.displayName() },
+            )
+        }
+
         SwitchPreference(
             title = { Text(stringResource(R.string.lyrics_romanize_japanese)) },
             icon = { Icon(painterResource(R.drawable.lyrics), null) },
@@ -268,13 +369,14 @@ fun ContentSettings(
             checked = lyricsRomanizeKorean,
             onCheckedChange = onLyricsRomanizeKoreanChange,
         )
-        // Queue lyrics pre-load settings
+
         SwitchPreference(
             title = { Text(stringResource(R.string.preload_queue_lyrics)) },
             icon = { Icon(painterResource(R.drawable.lyrics), null) },
             checked = preloadQueueLyricsEnabled,
             onCheckedChange = onPreloadQueueLyricsEnabledChange,
         )
+
         if (preloadQueueLyricsEnabled) {
             NumberPickerPreference(
                 title = { Text(stringResource(R.string.queue_lyrics_preload_count)) },
@@ -288,6 +390,7 @@ fun ContentSettings(
         }
 
         PreferenceGroupTitle(title = stringResource(R.string.misc))
+
         EditTextPreference(
             title = { Text(stringResource(R.string.top_length)) },
             icon = { Icon(painterResource(R.drawable.trending_up), null) },
@@ -295,6 +398,7 @@ fun ContentSettings(
             isInputValid = { it.toIntOrNull()?.let { num -> num > 0 } == true },
             onValueChange = onLengthTopChange,
         )
+
         ListPreference(
             title = { Text(stringResource(R.string.set_quick_picks)) },
             icon = { Icon(painterResource(R.drawable.home_outlined), null) },
@@ -309,6 +413,31 @@ fun ContentSettings(
             onValueSelected = onQuickPicksChange,
         )
     }
+
+    LanguageSelectorBottomSheet(
+        show = showLanguageSelector,
+        title = "Select App Language",
+        languages = languageOptions,
+        selectedCode = appLanguage,
+        systemDefaultCode = SYSTEM_DEFAULT,
+        systemDefaultLabel = "System Default",
+        searchPlaceholder = "Search language...",
+        onDismiss = { showLanguageSelector = false },
+        onLanguageSelected = { selectedCode ->
+            onAppLanguageChange(selectedCode)
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                val newLocale = if (selectedCode == SYSTEM_DEFAULT) {
+                    Locale.getDefault()
+                } else {
+                    Locale.forLanguageTag(selectedCode)
+                }
+                setAppLocale(context, newLocale)
+            }
+
+            showLanguageSelector = false
+        }
+    )
 
     TopAppBar(
         title = { Text(stringResource(R.string.content)) },
