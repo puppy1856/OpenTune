@@ -4,17 +4,18 @@
  * Licensed Under GPL-3.0 | see git history for contributors
  *
  * Orquestador de proveedores de canvas.
- * Reemplaza la implementación anterior basada en un único proxy server.
- *
- * Orden AUTO: Apple Music → OpenTune API → Tidal
+ * Usa Apple Music Artwork Provider como fuente principal.
+ * Orden: Apple Music → Custom Canvas → Tidal (fallback)
  */
 
 package com.arturo254.opentune.ui.player
 
-import com.arturo254.opentune.canvas.CanvasArtwork
-import com.arturo254.opentune.canvas.providers.AppleMusicCanvasProvider
+import com.arturo254.opentune.canvas.models.CanvasArtwork
+import com.arturo254.opentune.canvas.providers.AppleMusicArtworkProvider
+import com.arturo254.opentune.canvas.providers.CustomCanvasProvider
 import com.arturo254.opentune.canvas.providers.TidalCanvasProvider
 import com.arturo254.opentune.constants.CanvasSource
+import timber.log.Timber
 import java.util.Locale
 
 /**
@@ -22,19 +23,19 @@ import java.util.Locale
  *
  * @param songTitleRaw  Título tal como viene del MediaMetadata (puede tener feat., etc.)
  * @param artistNameRaw Nombre del artista tal como viene del MediaMetadata
- * @param albumName     Nombre del álbum (opcional, mejora la precisión de Apple Music)
- * @param storefront    Región de Apple Music (ej. "us", "mx")
+ * @param albumName     Nombre del álbum (opcional, mejora la precisión)
  * @param source        Fuente a usar; [CanvasSource.AUTO] prueba todas en orden
  */
 internal suspend fun fetchCanvasArtworkForPlayback(
     songTitleRaw: String,
     artistNameRaw: String,
     albumName: String? = null,
-    storefront: String = "us",
     source: CanvasSource = CanvasSource.AUTO,
 ): CanvasArtwork? {
     val songTitle = normalizeCanvasSongTitle(songTitleRaw)
     val artistName = normalizeCanvasArtistName(artistNameRaw)
+
+    Timber.d("🎵 Canvas Resolver - Buscando: $songTitle - $artistName (album=$albumName)")
 
     // Genera combinaciones (normalizado + raw) para mayor cobertura de búsqueda
     val candidates = linkedSetOf(
@@ -42,10 +43,22 @@ internal suspend fun fetchCanvasArtworkForPlayback(
         Triple(songTitleRaw, artistName, albumName),
         Triple(songTitle, artistNameRaw, albumName),
         Triple(songTitleRaw, artistNameRaw, albumName),
-    ).filter { (song, artist, _) -> song.isNotBlank() && artist.isNotBlank() }
+    )
 
-    return candidates.firstNotNullOfOrNull { (song, artist, album) ->
-        fetchFromSource(song, artist, album, storefront, source)
+    // 🔧 Fix: además del artista primario, probar cada artista individual
+    // (feat., colabs, "x", "&", etc.) porque el canvas puede estar guardado
+    // solo con el artista secundario (ej: "Tito Double P, Peso Pluma" -> el
+    // canvas está indexado únicamente como "Peso Pluma").
+    splitAndNormalizeArtists(artistNameRaw).forEach { singleArtist ->
+        candidates += Triple(songTitle, singleArtist, albumName)
+        candidates += Triple(songTitleRaw, singleArtist, albumName)
+    }
+
+    val filteredCandidates = candidates
+        .filter { (song, artist, _) -> song.isNotBlank() && artist.isNotBlank() }
+
+    return filteredCandidates.firstNotNullOfOrNull { (song, artist, album) ->
+        fetchFromSource(song, artist, album, source)
             ?.takeIf { !it.preferredAnimationUrl.isNullOrBlank() }
     }
 }
@@ -54,22 +67,48 @@ private suspend fun fetchFromSource(
     song: String,
     artist: String,
     album: String?,
-    storefront: String,
     source: CanvasSource,
 ): CanvasArtwork? {
+    val result = when (source) {
+        CanvasSource.AUTO -> {
+            // 🔥 NUEVO ORDEN: Apple Music → Custom Canvas → Tidal (fallback)
+            AppleMusicArtworkProvider.getBySongArtist(song, artist, album)
+                ?: CustomCanvasProvider.getBySongArtist(
+                    song = song,
+                    artist = artist,
+                    // 🔧 Fix: NO inventar el álbum con el título de la canción.
+                    // Si no hay álbum real, se pasa vacío para que el matching
+                    // de álbum en CustomCanvasProvider simplemente no aplique
+                    // en vez de comparar contra un valor incorrecto.
+                    album = album.orEmpty()
+                )
+                ?: TidalCanvasProvider.getBySongArtist(song, artist, album)
+        }
 
-    val result: CanvasArtwork? = when (source) {
-        CanvasSource.AUTO ->
-            AppleMusicCanvasProvider.getBySongArtist(song, artist, album, storefront)
+        CanvasSource.APPLE_MUSIC -> {
+            AppleMusicArtworkProvider.getBySongArtist(song, artist, album)
+        }
 
-        CanvasSource.APPLE_MUSIC ->
-            AppleMusicCanvasProvider.getBySongArtist(song, artist, album, storefront)
+        CanvasSource.CUSTOM -> {
+            CustomCanvasProvider.getBySongArtist(
+                song = song,
+                artist = artist,
+                album = album.orEmpty()
+            )
+        }
 
-        CanvasSource.TIDAL ->
+        CanvasSource.TIDAL -> {
             TidalCanvasProvider.getBySongArtist(song, artist, album)
+        }
     }
 
-    return result?.takeIf { !it.preferredAnimationUrl.isNullOrBlank() }
+    if (result != null) {
+        Timber.d("🎵 Canvas Resolver - ✅ Encontrado en ${source.name}: ${result.preferredAnimationUrl}")
+    } else {
+        Timber.d("🎵 Canvas Resolver - ❌ No encontrado para: $song - $artist")
+    }
+
+    return result
 }
 
 // ---------------------------------------------------------------------------
