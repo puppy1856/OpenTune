@@ -355,6 +355,8 @@
     <!-- End of Color Palette -->
 
     <string name="dark_theme">Dark theme</string>
+    <string name="enable_liquid_glass">Enable Liquid Glass</string>
+    <string name="enable_liquid_glass_desc">Apply frosted glass blur and vibrancy to the bottom navigation and miniplayer. Automatically forces dark theme.</string>
     <string name="dark_theme_on">On</string>
     <string name="dark_theme_off">Off</string>
     <string name="show_button">Show button</string>
@@ -837,4 +839,6 @@ OpenTune will only extract your token, and everything else is stored locally.</s
     <string name="reorder_lyrics_providers">Reorder Lyrics Providers</string>
     <string name="lyrics_provider_order">Lyrics Provider Order</string>
     <string name="lyrics_provider_priority">Priority: %1$s</string>
+    <string name="select_option">Select</string>
+    <string name="enter_value">Enter Value</string>
 </resources>
